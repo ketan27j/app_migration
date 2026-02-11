@@ -1,0 +1,65 @@
+migration:
+  source:
+    type: "bitbucket"
+    workspace: "mycompany"
+    repo_slug: "old-application"
+    branch: "main"
+    path_pattern: "src/**/*.cs"
+  target:
+    backend:
+      path: "/path/to/new-app/backend"
+      framework: "Spring Boot 3.2"
+      package_base: "com.company.newapp"
+    frontend:
+      path: "/path/to/new-app/frontend"
+      framework: "Angular 17"
+
+oracle:
+  host: "localhost"
+  port: 1521
+  service_name: "FREEPDB1"
+  username: "migration_user"
+  password: "${ORACLE_PASSWORD}"
+  pool_size: 10
+  vector:
+    embedding_dimension: 1536
+    distance_metric: "COSINE"
+  graph:
+    enabled: true
+
+sqlserver:
+  host: "sqlserver.company.com"
+  port: 1433
+  database: "ProductionDB"
+  username: "readonly_user"
+  password: "${SQLSERVER_PASSWORD}"
+
+bitbucket:
+  base_url: "https://api.bitbucket.org/2.0"
+  token: "${BITBUCKET_TOKEN}"
+  rate_limit_delay: 1.0
+
+llm:
+  base_url: "https://llm-server.internal.company.com:8443"
+  api_type: "openai"
+  auth_type: "bearer"
+  token: "${LLM_API_TOKEN}"
+  verify_ssl: true
+  cert_path: "config/llm_cert.pem"
+  model_name: "llama-3-70b-instruct"
+  max_tokens: 4000
+  temperature: 0.2
+  embedding_model: "text-embedding-ada-002"
+  embedding_url: "https://llm-server.internal.company.com:8443/embeddings"
+  custom_headers:
+    X-Request-ID: "migration-agent"
+
+mcp:
+  server_name: "migration-context"
+  host: "localhost"
+  port: 8080
+
+logging:
+  level: "INFO"
+  file: "logs/migration.log"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
